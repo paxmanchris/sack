@@ -1,0 +1,53 @@
+#!/bin/bash
+
+bakdir=/bak
+currentpath=`pwd`
+inputfile=$2
+
+abspath() {
+ base=`basename $inputfile` 
+ #dirname=`dirname $inputfile` 
+ absfile="$currentpath/$base"
+ if [[ ! -f $absfile ]]
+  then
+   echo "this will only accept files, $absfile is a directory" 
+   exit 1
+fi
+ #echo $absfile
+}
+
+save() {
+ abspath
+ #echo $absfile
+ #
+ mkdir -p `dirname $bakdir$absfile`
+ 
+ #echo find $(dirname $bakdir$absfile) -name $inputfile\* \| wc -l 
+ cnum=`find $(dirname $bakdir$absfile) -name $inputfile\* | wc -l` 
+ cp $absfile $bakdir$absfile
+ cd `dirname $bakdir$absfile`
+ gzip $inputfile
+ # tar commands, if used in the future
+ #echo tar -cvzf $bakdir$absfile.$cnum.tar.gz $absfile 
+ #tar -cvzf $bakdir$absfile.$cnum.tar.gz $absfile 
+ return 1;
+}
+
+parm=${1##*/}
+
+case $parm in
+save)
+save $2
+exit 1;;
+
+history)
+echo history
+exit 1;;
+
+load)
+echo load
+exit 1;;
+
+esac
+
+
