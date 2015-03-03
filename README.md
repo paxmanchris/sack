@@ -20,9 +20,9 @@ $ sack /etc/apache/apache.conf
 
 __oops! changes messed things up__
 $ sack history /etc/apache/apache.conf
--rw-r--r--. 1 root root 98655 Feb 18 18:27 /bak/root/revisr.zip.0.tar.gz
--rw-r--r--. 1 root root 98655 Feb 18 18:27 /bak/root/revisr.zip.1.tar.gz
--rw-r--r--. 1 root root 98655 Feb 18 18:29 /bak/root/revisr.zip.2.tar.gz
+-rw-r--r--. 1 root root 98655 Feb 18 18:27 /bak/root/apache.conf.0.tar.gz
+-rw-r--r--. 1 root root 98655 Feb 18 18:27 /bak/root/apache.conf.1.tar.gz
+-rw-r--r--. 1 root root 98655 Feb 18 18:29 /bak/root/apache.conf.2.tar.gz
 
 $ fbak restore apache.conf.0.gz /etc/apache/apache.conf
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bakdir=/bak
+bakdir=/sack
 currentpath=`pwd`
 inputfile=$2
 
