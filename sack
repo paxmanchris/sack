@@ -1,8 +1,9 @@
 #!/bin/bash
 
-bakdir=/sack
+bakdir=/var/local/sack
 currentpath=`pwd`
 inputfile=$2
+tstamp=_`date +%Y%m%d_%H%M%S`
 
 abspath() {
  base=`basename $inputfile` 
@@ -24,12 +25,17 @@ save() {
  
  #echo find $(dirname $bakdir$absfile) -name $inputfile\* \| wc -l 
  cnum=`find $(dirname $bakdir$absfile) -name $inputfile\* | wc -l` 
- cp $absfile $bakdir$absfile
+ echo copy: $absfile $bakdir$absfile$tstamp
+ cp $absfile $bakdir$absfile$tstamp
  cd `dirname $bakdir$absfile`
- gzip $inputfile
+ inputfile=$inputfile$tstamp
+ echo "backup: gzip  $inputfile"
+gzip $inputfile 
  # tar commands, if used in the future
  #echo tar -cvzf $bakdir$absfile.$cnum.tar.gz $absfile 
  #tar -cvzf $bakdir$absfile.$cnum.tar.gz $absfile 
+ echo Done: 
+ ls -l `dirname $bakdir$absfile`
  return 1;
 }
 
@@ -47,7 +53,8 @@ exit 1;;
 load)
 echo load
 exit 1;;
-
+*)
+echo Missing command, nonthing happend. use, \#sack save filename
 esac
 
 
